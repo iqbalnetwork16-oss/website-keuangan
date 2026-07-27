@@ -1,0 +1,193 @@
+/* =============================================
+   HALAMAN TRANSAKSI
+   ============================================= */
+
+.transaksi-page {
+    padding: 32px 0;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.page-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* --- Filters --- */
+.filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-group .form-control {
+    width: auto;
+    min-width: 140px;
+}
+
+/* --- Transaction List --- */
+.transaction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.transaction-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+}
+
+.transaction-card:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.transaction-card-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+}
+
+.transaction-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    font-size: 1.3rem;
+}
+
+.transaction-card-icon.pemasukan {
+    background: var(--income-light);
+}
+
+.transaction-card-icon.pengeluaran {
+    background: var(--expense-light);
+}
+
+.transaction-card-info {
+    flex: 1;
+}
+
+.transaction-card-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.transaction-card-info .transaction-category {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.transaction-card-info .transaction-note {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.transaction-card-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.transaction-card-amount {
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.transaction-card-amount.pemasukan {
+    color: var(--income);
+}
+
+.transaction-card-amount.pengeluaran {
+    color: var(--expense);
+}
+
+.transaction-card-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: right;
+}
+
+.transaction-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.btn-icon-sm {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    font-size: 1rem;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+    color: var(--text-secondary);
+}
+
+.btn-icon-sm:hover {
+    background: var(--border);
+}
+
+.btn-icon-sm.edit:hover {
+    color: var(--primary);
+}
+
+.btn-icon-sm.delete:hover {
+    color: var(--expense);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .search-box {
+        min-width: 100%;
+    }
+
+    .filter-group .form-control {
+        min-width: 100%;
+    }
+
+    .transaction-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .transaction-card-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - KeuanganKu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profil.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="dashboard.html" class="navbar-brand">💰 KeuanganKu</a>
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="transaksi.html" class="nav-link">Transaksi</a>
+                <a href="laporan.html" class="nav-link">Laporan</a>
+                <a href="profil.html" class="nav-link active">Profil</a>
+                <button id="darkModeToggle" class="btn btn-icon" title="Dark Mode">🌙</button>
+                <a href="login.html" class="btn btn-outline" id="logoutBtn">Keluar</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Profil Content -->
+    <main class="profil-page">
+        <div class="container">
+            <h1>Profil</h1>
+
+            <!-- Loading -->
+            <div id="loadingIndicator" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <span>Memuat data...</span>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="profile-card card">
+                <div class="profile-avatar">
+                    <div class="avatar-placeholder" id="avatarPlaceholder">👤</div>
+                </div>
+                <div class="profile-info">
+                    <h2 id="profileName">Nama Pengguna</h2>
+                    <p id="profileEmail">email@example.com</p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="profile-actions">
+                <button class="btn btn-outline btn-full" id="changePasswordBtn">🔑 Ganti Password</button>
+                <button class="btn btn-danger btn-full" id="logoutBtnProfile">🚪 Keluar</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Ganti Password -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ganti Password</h2>
+                <button class="modal-close" id="passwordModalClose">&times;</button>
+            </div>
+            <form id="passwordForm">
+                <div id="passwordError" class="alert alert-error" style="display: none;"></div>
+                <div id="passwordSuccess" class="alert alert-success" style="display: none;"></div>
+
+                <div class="form-group">
+                    <label for="currentPassword">Password Saat Ini</label>
+                    <input type="password" id="currentPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Password Baru</label>
+                    <input type="password" id="newPassword" class="form-control" placeholder="Minimal 6 karakter" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmNewPassword">Konfirmasi Password Baru</label>
+                    <input type="password" id="confirmNewPassword" class="form-control" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="passwordCancel">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profil.js"></script>
+</body>
+</html>
+

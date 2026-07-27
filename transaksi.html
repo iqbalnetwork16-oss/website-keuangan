@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi - KeuanganKu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/transaksi.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="dashboard.html" class="navbar-brand">💰 KeuanganKu</a>
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="transaksi.html" class="nav-link active">Transaksi</a>
+                <a href="laporan.html" class="nav-link">Laporan</a>
+                <a href="profil.html" class="nav-link">Profil</a>
+                <button id="darkModeToggle" class="btn btn-icon" title="Dark Mode">🌙</button>
+                <a href="login.html" class="btn btn-outline" id="logoutBtn">Keluar</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Transaksi Content -->
+    <main class="transaksi-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Transaksi</h1>
+                <button class="btn btn-primary" id="addTransactionBtn">+ Tambah Transaksi</button>
+            </div>
+
+            <!-- Loading -->
+            <div id="loadingIndicator" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <span>Memuat data...</span>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Cari transaksi...">
+                </div>
+                <div class="filter-group">
+                    <select id="monthFilter" class="form-control">
+                        <option value="">Semua Bulan</option>
+                        <option value="01">Januari</option>
+                        <option value="02">Februari</option>
+                        <option value="03">Maret</option>
+                        <option value="04">April</option>
+                        <option value="05">Mei</option>
+                        <option value="06">Juni</option>
+                        <option value="07">Juli</option>
+                        <option value="08">Agustus</option>
+                        <option value="09">September</option>
+                        <option value="10">Oktober</option>
+                        <option value="11">November</option>
+                        <option value="12">Desember</option>
+                    </select>
+                    <select id="categoryFilter" class="form-control">
+                        <option value="">Semua Kategori</option>
+                        <option value="Makan">Makan</option>
+                        <option value="Transportasi">Transportasi</option>
+                        <option value="Belanja">Belanja</option>
+                        <option value="Pendidikan">Pendidikan</option>
+                        <option value="Kesehatan">Kesehatan</option>
+                        <option value="Hiburan">Hiburan</option>
+                        <option value="Tagihan">Tagihan</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                    <select id="typeFilter" class="form-control">
+                        <option value="">Semua Tipe</option>
+                        <option value="pemasukan">Pemasukan</option>
+                        <option value="pengeluaran">Pengeluaran</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Transaction List -->
+            <div class="transaction-list" id="transactionList">
+                <p class="text-muted">Belum ada transaksi.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Tambah/Edit Transaksi -->
+    <div class="modal" id="transactionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Tambah Transaksi</h2>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <form id="transactionForm">
+                <input type="hidden" id="transactionId">
+                
+                <div id="formError" class="alert alert-error" style="display: none;"></div>
+
+                <div class="form-group">
+                    <label>Jenis Transaksi</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="type" value="pemasukan" checked>
+                            <span class="radio-income">📈 Pemasukan</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="type" value="pengeluaran">
+                            <span class="radio-expense">📉 Pengeluaran</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Nominal (Rp)</label>
+                    <input type="number" id="amount" class="form-control" placeholder="100000" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Kategori</label>
+                    <select id="category" class="form-control" required>
+                        <option value="">Pilih Kategori</option>
+                        <option value="Makan">Makan</option>
+                        <option value="Transportasi">Transportasi</option>
+                        <option value="Belanja">Belanja</option>
+                        <option value="Pendidikan">Pendidikan</option>
+                        <option value="Kesehatan">Kesehatan</option>
+                        <option value="Hiburan">Hiburan</option>
+                        <option value="Tagihan">Tagihan</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Tanggal</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="note">Catatan (opsional)</label>
+                    <textarea id="note" class="form-control" placeholder="Tambahkan catatan..." rows="2"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="modalCancel">Batal</button>
+                    <button type="submit" class="btn btn-primary" id="modalSubmit">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Hapus -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h2>Hapus Transaksi</h2>
+                <button class="modal-close" id="deleteModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus transaksi ini?</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" id="deleteCancel">Batal</button>
+                <button class="btn btn-danger" id="deleteConfirm">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/transaksi.js"></script>
+</body>
+</html>
+

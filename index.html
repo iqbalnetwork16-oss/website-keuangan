@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekap Keuangan Pribadi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="navbar-brand">💰 KeuanganKu</a>
+            <div class="navbar-menu" id="navbarMenu">
+                <a href="login.html" class="btn btn-outline">Masuk</a>
+                <a href="register.html" class="btn btn-primary">Daftar</a>
+            </div>
+            <!-- Mobile menu toggle -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Kelola Keuangan Pribadi<br><span class="text-primary">dengan Mudah</span></h1>
+                <p>Catat pemasukan dan pengeluaran, pantau keuangan, dan capai tujuan finansial Anda.</p>
+                <div class="hero-buttons">
+                    <a href="register.html" class="btn btn-primary btn-lg">Mulai Sekarang</a>
+                    <a href="login.html" class="btn btn-outline btn-lg">Masuk</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-illustration">
+                    📊
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Fitur Unggulan</h2>
+            <div class="features-grid">
+                <div class="card feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Catat Transaksi</h3>
+                    <p>Catat pemasukan dan pengeluaran dengan kategori yang lengkap.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Laporan Keuangan</h3>
+                    <p>Lihat grafik pemasukan dan pengeluaran per bulan.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Target Tabungan</h3>
+                    <p>Tetapkan target tabungan dan pantau progresnya.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Aman & Pribadi</h3>
+                    <p>Data Anda aman dengan Firebase Authentication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 KeuanganKu. Dibuat untuk belajar.</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navbarMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+

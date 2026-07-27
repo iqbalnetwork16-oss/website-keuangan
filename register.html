@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - KeuanganKu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="navbar-brand">💰 KeuanganKu</a>
+        </div>
+    </nav>
+
+    <!-- Register Form -->
+    <main class="auth-page">
+        <div class="container">
+            <div class="auth-card card">
+                <div class="auth-header">
+                    <h1>Daftar</h1>
+                    <p>Buat akun baru Anda</p>
+                </div>
+                <form id="registerForm" class="auth-form">
+                    <!-- Error Message -->
+                    <div id="errorMessage" class="alert alert-error" style="display: none;"></div>
+                    
+                    <!-- Loading -->
+                    <div id="loadingIndicator" class="loading" style="display: none;">
+                        <div class="spinner"></div>
+                        <span>Memproses...</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" class="form-control" placeholder="Nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="contoh@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Minimal 6 karakter" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Konfirmasi Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Ulangi password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Daftar</button>
+                </form>
+                <div class="auth-footer">
+                    <p>Sudah punya akun? <a href="login.html">Masuk</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>
+
