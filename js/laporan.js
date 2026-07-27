@@ -2,6 +2,8 @@
  * HALAMAN LAPORAN
  * ================
  * Menampilkan laporan keuangan dengan grafik menggunakan Chart.js.
+ * Catatan: Tidak menggunakan orderBy() pada Firestore karena membutuhkan
+ * composite index. Menggunakan sort manual sebagai gantinya.
  */
 
 let currentUserId = null;
@@ -47,7 +49,6 @@ async function loadReportData() {
     try {
         const snapshot = await db.collection('transactions')
             .where('uid', '==', currentUserId)
-            .orderBy('date', 'desc')
             .get();
 
         const transactions = [];
@@ -57,6 +58,9 @@ async function loadReportData() {
                 ...doc.data()
             });
         });
+
+        // Sorting manual descending by date
+        transactions.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
         // Hitung ringkasan
         calculateSummary(transactions);
@@ -300,13 +304,23 @@ function exportCSV() {
 
     db.collection('transactions')
         .where('uid', '==', currentUserId)
-        .orderBy('date', 'desc')
         .get()
         .then(snapshot => {
             let csv = 'Tanggal,Tipe,Kategori,Nominal,Catatan\n';
             
+            // Convert to array and sort manually
+            const transactions = [];
             snapshot.forEach(doc => {
-                const t = doc.data();
+                transactions.push({
+                    id: doc.id,
+                    ...doc.data()
+                });
+            });
+            
+            // Sort by date descending
+            transactions.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+
+            transactions.forEach(t => {
                 const date = t.date || '';
                 const type = t.type === 'pemasukan' ? 'Pemasukan' : 'Pengeluaran';
                 const category = t.category || '';
@@ -329,4 +343,3 @@ function exportCSV() {
             alert('Gagal export CSV.');
         });
 }
-

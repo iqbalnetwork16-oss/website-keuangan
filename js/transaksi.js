@@ -92,14 +92,19 @@ function initEventListeners() {
     });
 }
 
+
+
 /**
  * Memuat semua transaksi dari Firestore
+ * ========================================
+ * Catatan: Tidak menggunakan orderBy() karena membutuhkan
+ * composite index di Firebase. Menggunakan sort manual sebagai gantinya.
  */
 async function loadTransactions() {
     try {
+        // Query tanpa orderBy untuk menghindari kebutuhan index Firebase
         const snapshot = await db.collection('transactions')
             .where('uid', '==', currentUserId)
-            .orderBy('date', 'desc')
             .get();
 
         allTransactions = [];
@@ -110,12 +115,34 @@ async function loadTransactions() {
             });
         });
 
+        // Sorting manual berdasarkan tanggal (descending)
+        allTransactions.sort((a, b) => {
+            const dateA = new Date(a.date || 0);
+            const dateB = new Date(b.date || 0);
+            return dateB - dateA;
+        });
+
         renderTransactions(allTransactions);
         updateFilterCount();
     } catch (error) {
         console.error('Error loading transactions:', error);
-        document.getElementById('transactionList').innerHTML = 
-            '<p class="text-muted">Gagal memuat data transaksi.</p>';
+        
+        // Tampilkan pesan error yang jelas ke user
+        const container = document.getElementById('transactionList');
+        if (container) {
+            container.innerHTML = `
+                <div class="alert alert-error" style="display: block;">
+                    Gagal memuat transaksi: ${error.message || 'Terjadi kesalahan.'}
+                    <br>
+                    <strong>Kemungkinan penyebab:</strong>
+                    <ol style="margin-top: 8px; padding-left: 20px;">
+                        <li>Firestore Database belum dibuat di Firebase Console</li>
+                        <li>Security Rules Firestore memblokir akses</li>
+                        <li>Belum login dengan benar</li>
+                    </ol>
+                </div>
+            `;
+        }
     }
 }
 

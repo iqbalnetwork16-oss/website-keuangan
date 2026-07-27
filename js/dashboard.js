@@ -35,13 +35,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /**
  * Memuat data dashboard dari Firestore
+ * Catatan: Tidak menggunakan orderBy() karena membutuhkan
+ * composite index di Firebase. Menggunakan sort manual sebagai gantinya.
  */
 async function loadDashboardData(uid) {
     try {
-        // Ambil semua transaksi user
+        // Ambil semua transaksi user (tanpa orderBy untuk hindari index)
         const snapshot = await db.collection('transactions')
             .where('uid', '==', uid)
-            .orderBy('date', 'desc')
             .get();
 
         const transactions = [];
@@ -51,6 +52,9 @@ async function loadDashboardData(uid) {
                 ...doc.data()
             });
         });
+
+        // Sorting manual descending by date
+        transactions.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
         // Hitung total saldo, pemasukan, pengeluaran
         let totalIncome = 0;
@@ -120,17 +124,14 @@ function displayRecentTransactions(transactions) {
                         <h4>${t.category || 'Tanpa Kategori'}</h4>
                         <p>${t.note ? t.note : formatDateShort(t.date)}</p>
                     </div>
-                </div>
                 <div class="transaction-item-right">
                     <div class="transaction-amount ${amountClass}">
                         ${prefix} ${formatRupiah(t.amount)}
                     </div>
                     <small class="text-muted">${formatDateShort(t.date)}</small>
                 </div>
-            </div>
         `;
     });
 
     container.innerHTML = html;
 }
-
