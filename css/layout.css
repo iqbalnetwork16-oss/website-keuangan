@@ -1,0 +1,193 @@
+/* =============================================
+   LAYOUT UTAMA - KeuanganKu
+   ============================================= */
+
+:root {
+    --sidebar-width: 240px;
+    --bottom-nav-height: 60px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.app-container {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+/* --- Sidebar (Desktop) --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    z-index: 90;
+}
+
+.sidebar-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.sidebar-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.sidebar-nav a .icon {
+    font-size: 1.2rem;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background: var(--bg);
+    overflow-y: auto;
+}
+
+/* --- Bottom Navigation (Mobile) --- */
+.bottom-nav {
+    display: none; /* Hidden by default, shown on mobile */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--bottom-nav-height);
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    z-index: 100;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    text-decoration: none;
+    padding: 5px 0;
+    transition: all 0.2s;
+}
+
+.bottom-nav-item:hover,
+.bottom-nav-item.active {
+    color: var(--primary);
+}
+
+.bottom-nav-item .icon {
+    font-size: 1.4rem;
+    margin-bottom: 3px;
+}
+
+.bottom-nav-item.add-button {
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    transform: translateY(-15px); /* Lift button */
+    transition: all 0.2s;
+}
+
+.bottom-nav-item.add-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-15px) scale(1.05);
+}
+
+/* --- Sidebar Styling Refinements --- */
+.sidebar-nav a i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1023px) {
+    .sidebar {
+        display: none; /* Hide sidebar on smaller screens */
+    }
+    .bottom-nav {
+        display: flex; /* Show bottom nav on smaller screens */
+    }
+    .main-content {
+        padding-bottom: var(--bottom-nav-height); /* Add padding to prevent content from being hidden by bottom nav */
+    }
+}
+
+@media (min-width: 1024px) {
+    .bottom-nav {
+        display: none; /* Hide bottom nav on desktop */
+    }
+}
+
+/* --- Utility Classes --- */
+.mt-2 {
+    margin-top: 8px;
+}
+
+.btn-full {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}

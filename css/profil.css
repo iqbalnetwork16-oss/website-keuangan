@@ -3,7 +3,14 @@
    ============================================= */
 
 .profil-page {
-    padding: 32px 0;
+    padding: 0;
+}
+
+.main-content {
+    padding-top: 24px;
+}
+
+.profil-page .container {
     max-width: 500px;
     margin: 0 auto;
 }
@@ -54,6 +61,26 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.profile-actions {
+    animation: fadeIn 0.4s ease-out;
 }
 
 @media (max-width: 480px) {

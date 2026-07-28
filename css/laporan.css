@@ -3,7 +3,25 @@
    ============================================= */
 
 .laporan-page {
-    padding: 32px 0;
+    padding: 0;
+}
+
+.main-content {
+    padding-top: 24px;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.page-header h1 {
+    flex: 1;
+    min-width: 200px;
 }
 
 .action-buttons {
@@ -55,5 +73,25 @@
     .action-buttons .btn {
         flex: 1;
     }
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.summary-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.chart-card {
+    animation: fadeIn 0.4s ease-out;
 }
 
